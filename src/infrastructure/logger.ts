@@ -6,7 +6,7 @@ export const logger = new Console({
   stderr: fs.createWriteStream('./errors.txt', { flags: 'a' }),
 });
 
-export const logError = (error: any, data: any) => {
+export const logError = (error: any, data?: any) => {
   try {
     let date = new Date().toLocaleString('uk-UA');
 
