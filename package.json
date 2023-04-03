@@ -1,11 +1,12 @@
 {
-  "name": "pocock-cource",
+  "name": "syla-hromady-bot",
   "version": "1.0.0",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:parcel": "parcel build --no-source-maps ./src/index.ts",
+    "build": "parcel build --no-source-maps --no-cache ./src/index.ts",
+    "run:production": "npm run build && pm2 start dist/main.js --max-memory-restart 300M --cron-restart \"0 5 * * * \"",
     "watch": "tsc -w",
     "dev": "tsc-watch -p ./tsconfig.json --onSuccess \"node ./dist/index.js\""
   },
