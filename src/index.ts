@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { initBot } from './bot/init';
+import { initBot } from './modules/bot/init';
 import { logError } from './infrastructure/logger';
 
 dotenv.config();
