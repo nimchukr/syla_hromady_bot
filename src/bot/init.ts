@@ -5,16 +5,17 @@ import { messageController } from './middleware/messageController';
 import { MyContext } from './types';
 
 export async function initBot() {
-  const throttler = telegrafThrottler();
-  const stage = new Scenes.Stage<MyContext>();
   const token = process.env.BOT_TOKEN;
-  const bot = new Telegraf<MyContext>(token);
 
   console.log('========================');
   console.log('Bot has started working');
   console.log('========================\n');
 
   try {
+    const stage = new Scenes.Stage<MyContext>();
+    const throttler = telegrafThrottler();
+    const bot = new Telegraf<MyContext>(token);
+
     bot.use(session());
     bot.use(throttler);
     bot.use(messageController);
@@ -23,7 +24,6 @@ export async function initBot() {
     setBotAction(bot, stage);
     await bot.launch();
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }

@@ -12,21 +12,11 @@ export const doReply = async (ctx: MyContext) => {
   }
 };
 
-export const setInitialMenu = async (ctx: MyContext, title?: string) => {
+export const doInitialReplyAction = async (ctx: MyContext) => {
   await ctx.reply(
     'Оберіть потрібну дію, що знаходиться нижче:',
-    Markup.keyboard([[FORM_BUTTON, { text: 'Реєстраційна Форма', callback_data: 'test123' }]])
+    Markup.keyboard([[FORM_BUTTON]])
       .oneTime()
       .resize(),
   );
-  await ctx.deleteMessage().catch(e => {});
-};
-
-export const doInitialReplyAction = async (ctx: MyContext) => {
-  return setInitialMenu(ctx);
-  try {
-    await ctx.editMessageText('Оберіть дію:', INITIAL_KEYBOARD);
-  } catch (error) {
-    await doReply(ctx);
-  }
 };
