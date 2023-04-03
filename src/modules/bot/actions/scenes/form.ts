@@ -80,7 +80,6 @@ const addCheckboxOptionAction = async (ctx: MyContext, message: string, field: C
   const text = message.replace('✅ ', '');
 
   if (!field.options.includes(text) && field.hasOther) {
-    ctx.scene.session.alternativeValue = text;
     updateСhoiceState(ctx, field, text, { isOther: true });
     const replyText = `${text} було додано.\n${subtitle}`;
     await ctx.reply(replyText);
