@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build --no-source-maps --no-cache ./src/index.ts",
-    "run:production": "npm run build && pm2 start dist/main.js --max-memory-restart 300M --cron-restart \"0 5 * * * \"",
+    "start:production": "npm run build && pm2 start dist/main.js --max-memory-restart 300M --cron-restart \"0 5 * * * \"",
     "watch": "tsc -w",
     "dev": "tsc-watch -p ./tsconfig.json --onSuccess \"node ./dist/index.js\""
   },
