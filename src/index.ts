@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import { initBot } from './bot/init';
+import { logError } from './infrastructure/logger';
 
 dotenv.config();
 
@@ -11,10 +12,12 @@ initApp();
 
 process.on('unhandledRejection', error => {
   console.error('Unhandled rejection', error);
-  process.exit(1);
+  logError(error);
+  process.exitCode = 1;
 });
 
 process.on('uncaughtException', error => {
   console.error('Unhandled rejection', error);
-  process.exit(1);
+  logError(error);
+  process.exitCode = 1;
 });

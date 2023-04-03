@@ -7,4 +7,6 @@ credentials_*.json
 credentials.json
 token.json
 token-_*.json
+logs.txt
+errors.txt
 
