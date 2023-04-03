@@ -6,12 +6,13 @@ export const submitForm = async (formId: string, data: Record<string, any>, fiel
   const entries = fields
     .map(field => {
       const value = data[field.id];
-      if (value || (Array.isArray(value) && value.length === 0)) return '';
+      if (!value || (Array.isArray(value) && value.length === 0)) return '';
       const entry = `entry.${field.id}=${Array.isArray(value) ? value.join(',') : value}`;
       return entry;
     })
     .filter(Boolean)
     .join('&');
+
   const url = `${baseUrl}/formResponse?&submit=Submit?usp=pp_url&${entries}`;
 
   const validUrl = encodeURI(url);
