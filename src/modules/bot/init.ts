@@ -13,11 +13,12 @@ export async function initBot() {
 
   try {
     const stage = new Scenes.Stage<MyContext>();
-    const throttler = telegrafThrottler();
+    // TODO uncomment in case of flood issues
+    // const throttler = telegrafThrottler();
+    // bot.use(throttler);
     const bot = new Telegraf<MyContext>(token);
     bot.use(session());
 
-    bot.use(throttler);
     bot.use(messageController);
     bot.use(stage.middleware());
 
