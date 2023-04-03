@@ -1,0 +1,10 @@
+.env
+node_modules
+dist
+.vscode
+.parcel-cache
+credentials_*.json
+credentials.json
+token.json
+token-_*.json
+
