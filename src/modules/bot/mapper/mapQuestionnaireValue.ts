@@ -1,7 +1,8 @@
 import { mapFieldValueToEntryParam } from '../../google/form/mappers';
 import { QuestionnaireValue } from '../types/questionnaire';
 
-export const mapQuestionnaireValues = (questionnaireState: Record<string, QuestionnaireValue>) => {
+// Maps questionnaire values to google form params
+export const mapQuestionnaireValuesToGoogleForm = (questionnaireState: Record<string, QuestionnaireValue>) => {
   return Object.entries(questionnaireState).reduce((results, [id, value]) => {
     if (typeof value === 'string') {
       const entry = mapFieldValueToEntryParam({ id, value });
