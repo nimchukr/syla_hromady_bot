@@ -3,7 +3,10 @@ import type { MyContext } from '../types/main';
 
 export const messageController = async (ctx: MyContext, next: () => Promise<void>) => {
   if (isUserKicked(ctx)) {
-    delete ctx.session.userState[ctx.message.from.id];
+    const id = ctx.message?.from?.id
+    if(id) {
+      delete ctx.session.userState[id];
+    }
     return;
   }
 
