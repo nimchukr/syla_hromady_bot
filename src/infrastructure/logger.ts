@@ -1,10 +1,16 @@
-import { Console } from 'console';
+import { Console, log } from 'console';
 import fs from 'fs';
 
 export const logger = new Console({
   stdout: fs.createWriteStream('./logs.txt', { flags: 'a' }),
   stderr: fs.createWriteStream('./errors.txt', { flags: 'a' }),
 });
+
+
+export const logInfo = (msg: string) => {
+  let date = new Date().toLocaleString('uk-UA');
+  logger.info(`Date:${date}\n${msg}n`);
+}
 
 export const logError = (error: any, data?: any) => {
   try {
