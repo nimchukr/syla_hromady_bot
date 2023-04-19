@@ -24,9 +24,10 @@ const handleMultipleStateChange = (
 };
 
 export const getUserState = (ctx: MyContext) => {
-  if(!ctx.message?.from?.id) {
+  if(!ctx.message?.from?.id || !ctx.session) {
     return {}
   }
+  
   if (!ctx.session.userState) {
     ctx.session.userState = {};
   }
