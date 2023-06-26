@@ -1,6 +1,6 @@
 import { MyContext } from '../../types/main';
 import { QuestionnaireField, ChoiceField, SceneNames, QuestionnaireValue } from '../../types/questionnaire';
-import { updateTextState, updateСhoiceState } from '../../scenes/state';
+import { isEmptyChoiceState, updateTextState, updateСhoiceState } from '../../scenes/state';
 import { buildOptionsMenu, buildBaseMenu, CHOICE_MENU_KEYS } from '../../markup/scenes/form';
 import { doInitialReplyAction } from '../common';
 import { submitForm } from '../../../google/form/submitForm';
@@ -13,6 +13,7 @@ const NO_NAME_FIELD = 'Поле без назви';
 const RADIO_INITIAL_REPLY = 'Будь ласка оберіть один з варіантів з меню нижче';
 const CHOICE_INITIAL_REPLY = 'Будь ласка оберіть один або більше пунктів з меню нижче та натисніть "Продовжити" коли будете готові.';
 const CHOICE_NEXT_REPLY = `Натисніть "${CHOICE_MENU_KEYS.next}" або оберіть додаткові пункти.`;
+const NO_CHOICE_SPECIFIED = 'Відповідь не була вказана.';
 
 const CHOICE_ALTERNATIVE_REPLY = ' Якщо ви бажаєте надати альтернативний варіант, введіть відповідь текстом.';
 const SUBMIT_REPLY = 'Ваш запит зареєстровано, очікуйте на зворотній зв’язок від нашого менеджера. Хорошого вам дня!';
@@ -108,6 +109,9 @@ const confirmCheckboxAction = async (ctx: MyContext, sceneNames: SceneNames) => 
 
 const checkboxInputAction = async (ctx: MyContext, message: string, field: ChoiceField, sceneNames: SceneNames) => {
   if (message === CHOICE_MENU_KEYS.next) {
+    if(isEmptyChoiceState(ctx, field)) {
+      updateСhoiceState(ctx, field, NO_CHOICE_SPECIFIED, { isOther: true });
+    }
     return confirmCheckboxAction(ctx, sceneNames);
   }
   return addCheckboxOptionAction(ctx, message, field);

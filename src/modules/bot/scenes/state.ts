@@ -67,6 +67,11 @@ export const updateTextState = (ctx: MyContext, field: QuestionnaireField, value
 
 export const updateСhoiceState = (ctx: MyContext, field: ChoiceField, value: string, options?: UpdateStateOptions) => {
   const questionnaire = getUserQuestionnaireState(ctx);
-
+    
   return handleMultipleStateChange(getMultipleFieldState(questionnaire, field), value, options);
 };
+
+export const isEmptyChoiceState = (ctx: MyContext, field: ChoiceField) => {
+  const questionnaire = getUserQuestionnaireState(ctx);
+  return !questionnaire[field.id];
+}
